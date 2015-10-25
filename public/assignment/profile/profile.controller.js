@@ -12,7 +12,7 @@
         
         $scope.update = function() {
             
-            UserService.updateUser($scope.user.id, $scope.user, function(user){
+            UserService.updateUser($scope.profileUser.id, $scope.profileUser, function(user){
                 
                 if(user != null)
                 {

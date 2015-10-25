@@ -12,9 +12,9 @@
         if ($rootScope.user != null){
         FormService.findAllFormsForUser($rootScope.user.id, callback);
                                         
-        function callback(forms){
-            $scope.forms = forms;
-        }
+            function callback(forms){
+                $scope.forms = forms;
+            }
         }
         
         $scope.deleteForm = function(index) {
