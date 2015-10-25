@@ -11,7 +11,7 @@
         
         $scope.login = function() {
             
-            UserService.findUserByUsernameAndPassword($scope.user.username, $scope.user.password, function(user){
+            UserService.findUserByUsernameAndPassword($scope.loginUser.username, $scope.loginUser.password, function(user){
                 
                 if(user != null)
                 {
