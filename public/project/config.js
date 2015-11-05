@@ -55,6 +55,11 @@
             .when("/air-jordan-13-cp3", {
                 templateUrl: "home/air-jordan-13-cp3.view.html",
                 controller: "AirJordan13CP3CommentController"
+            }) 
+        
+            .when("/mercurialCr7Se324kGold", {
+                templateUrl: "home/mercurialCr7Se324kGold.view.html",
+                controller: "MercurialCr7Se324kGoldController"
             })
         
             .otherwise({
