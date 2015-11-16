@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="FormBuilderApp">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="container">
+                <h1>Forms: Registration Form</h1>
+                <ul class="nav nav-tabs">
+
+                    <li role="presentation"><a href="#/forms">Forms</a></li>
+                    <li role="presentation" class="active"><a href="#">Fields</a></li>
+                </ul>
+                <div class="container">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <tbody>
+                                <tr ng-repeat="field in model.fields">
+                                    <div ng-switch="fieldType">
+
+                                            <td ng-switch-when="singleLineTextField">
+                                                <div class="form-group">
+                                                    <label for="firstName">First Name:</label>
+                                                    <input type="firstName" class="form-control" id="firstName" placeholder="First Name">
+                                                </div>
+                                            </td>
+
+
+
+                                        <td ng-switch-when="singleLineTextField">
+                                                <div class="form-group">
+                                                    <label for="lastName">Last Name:</label>
+                                                    <input type="lastName" class="form-control" id="lastName" placeholder="Last Name">
+                                                </div>
+                                            </td>
+
+
+
+                                            <td ng-switch-when="dateField">
+                                                <div class="form-group">
+                                                    <label for="dateOfBirth">Date of Birth:</label>
+                                                    <input type="date" class="form-control" id="dateOfBirth" style="text-align: center">
+                                                </div>
+                                            </td>
+
+
+                                        <td ng-switch-when="dropdownField">
+
+                                                <div class="form-group">
+                                                    <label for="gender">Gender:</label>
+                                                    <select class="form-control" type="text" id="gender">
+                                                        <option value="FEMALE">Female</option>
+                                                        <option value="MALE">Male</option>
+                                                    </select>
+                                                </div>
+
+                                        </td>
+
+                                        <td ng-switch-when="checkboxesField">
+
+                                                <div class="form-group">
+                                                    <label for="role">Role :</label>
+                                                    <div class="checkbox" id="role">
+                                                        <label>
+                                                            <input type="checkbox">Admin
+                                                        </label>
+                                                        <label>
+                                                            <input type="checkbox">Student
+                                                        </label>
+                                                        <label>
+                                                            <input type="checkbox">User
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                        </td>
+
+                                        <td ng-switch-when="radioButtonsField">
+
+                                                <div class="form-group">
+                                                    <label for="license">License Agreement:</label>
+                                                    <div class="radio" id="license">//????????????????????????????
+                                                        <label><input id="licenseyes" type="radio" name="bool"></label>
+                                                    </div>
+                                                    <div class="radio" id="license">//???????????????if both r license, error?????
+                                                        <label><input id="licenseno" type="radio" name="bool"></label>
+                                                    </div>
+                                                </div>
+
+                                        </td>
+
+
+
+                                    </div>
+                                    <td>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </a>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-plus"></span>
+                                        </a>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-remove"></span>
+                                        </a>
+                                        <a href="#">
+                                            <span class="glyphicon glyphicon-align-justify"></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                            <tr>
+                                <td>
+                                    <div class="form-group">
+                                        <label ng-click="addField(model.fieldType)" for="addNewField">add new field:</label>
+                                        <select id="addNewField" class="form-control" type="text" name="field" ng-model="model.fieldType">
+                                            <option value="SINGLELINE">single line text</option>
+                                            <option value="DATE">date</option>
+                                            <option value="DROPDOWN">dropdown</option>
+                                            <option value="CHECKBOX">checkboxes</option>
+                                            <option value="RADIO">radio buttons</option>
+                                            <option value="GRAPH">paragraph text field</option>
+                                        </select>
+                                    </div>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!--<table class="table table-striped">-->
+                    <!--<form>-->
+                        <!--<table>-->
+                            <!--<tr>-->
+                                <!--<td>-->
+                                    <!--First Name-->
+                                    <!--<input type="text" class="form-control"/>-->
+                                <!--</td>-->
+                                <!--<td>-->
+                                    <!--<a href="#">-->
+                                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                    <!--</a>-->
+                                    <!--<a href="#">-->
+                                        <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                    <!--</a>-->
+                                    <!--<a href="#">-->
+                                        <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                    <!--</a>-->
+                                    <!--<a href="#">-->
+                                        <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                                    <!--</a>-->
+                                <!--</td>-->
+                            <!--</tr>-->
+                        <!--</table>-->
+
+
+
+                        <!--<form>-->
+                            <!--<div class="form-group">-->
+                                <!--<label for="exampleInputlastName">Last Name</label>-->
+                                <!--<table>-->
+                                    <!--<tr>-->
+                                        <!--<td>-->
+                                            <!--<input type="text" class="form-control" id="exampleInputlastName" placeholder="Last Name">-->
+                                        <!--</td>-->
+                                        <!--<td>       </td>-->
+                                        <!--<td>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <!--</a>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                            <!--</a>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                            <!--</a>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                                            <!--</a>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                <!--</table>-->
+
+
+                            <!--</div>-->
+                        <!--</form>-->
+
+                        <!--<form>-->
+                            <!--<div class="form-group">-->
+                                <!--<table>-->
+                                    <!--<tr>-->
+                                        <!--<td>-->
+                                            <!--<h4>Date of birth :</h4>-->
+                                            <!--<input type="date" class="form-control"/>-->
+                                        <!--</td>-->
+                                        <!--<td>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                            <!--</a>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                            <!--</a>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                            <!--</a>-->
+                                            <!--<a href="#">-->
+                                                <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                                            <!--</a>-->
+                                        <!--</td>-->
+                                    <!--</tr>-->
+                                <!--</table>-->
+                            <!--</div>-->
+                        <!--</form>-->
+
+                        <!--<form action="#">-->
+                            <!--<p>Gender:</p>-->
+                            <!--<select name="gender">-->
+                                <!--<option value="male">Male</option>-->
+                                <!--<option value="female">Female</option>-->
+                            <!--</select>-->
+                            <!--<td>-->
+                                <!--<a href="#">-->
+                                    <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                <!--</a>-->
+                                <!--<a href="#">-->
+                                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                <!--</a>-->
+                                <!--<a href="#">-->
+                                    <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                <!--</a>-->
+                                <!--<a href="#">-->
+                                    <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                                <!--</a>-->
+                            <!--</td>-->
+                        <!--</form>-->
+
+                        <!--<form action="#">-->
+                            <!--<p>Roles:-->
+                                <!--<br />-->
+                            <!--<table>-->
+                                <!--<tr>-->
+                                    <!--<td><input type="checkbox" name="service"-->
+                                               <!--value="admin" checked="checked" /> Admin-->
+                                        <!--<input type="checkbox" name="service"-->
+                                               <!--value="student" /> Student-->
+                                        <!--<input type="checkbox" name="service"-->
+                                               <!--value="user" checked="checked" /> User</td>-->
+                                    <!--<td><a href="#">-->
+                                        <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                    <!--</a>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                        <!--</a>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                        <!--</a>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                                        <!--</a>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+
+                            <!--</p>-->
+
+                        <!--</form>-->
+
+                        <!--<form action="#">-->
+                            <!--<p>License Agreement:-->
+                                <!--<br />-->
+                            <!--<table>-->
+                                <!--<tr>-->
+                                    <!--<td>-->
+                                        <!--<form role="form">-->
+                                            <!--<label class="radio-inline">-->
+                                                <!--<input type="radio" name="optradio">Yes-->
+                                            <!--</label>-->
+                                            <!--<label class="radio-inline">-->
+                                                <!--<input type="radio" name="optradio">No-->
+                                            <!--</label>-->
+                                        <!--</form>-->
+                                    <!--</td>-->
+                                    <!--<td>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-pencil"></span>-->
+                                        <!--</a>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                        <!--</a>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-remove"></span>-->
+                                        <!--</a>-->
+                                        <!--<a href="#">-->
+                                            <!--<span class="glyphicon glyphicon-align-justify"></span>-->
+                                        <!--</a>-->
+                                    <!--</td>-->
+                                <!--</tr>-->
+                            <!--</table>-->
+                            <!--</p>-->
+                        <!--</form>-->
+                        <!--<hr />-->
+                        <!--<form action="#">-->
+                            <!--<p>Add new field:</p>-->
+                            <!--<select name="gender">-->
+                                <!--<option value="male">Single Line Text</option>-->
+                            <!--</select>-->
+
+                            <!--<td>-->
+                                <!--<a href="#">-->
+                                    <!--<span class="glyphicon glyphicon-plus"></span>-->
+                                <!--</a>-->
+                            <!--</td>-->
+                        <!--</form>-->
+                    <!--</form>-->
+
+                <!--</table>-->
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
