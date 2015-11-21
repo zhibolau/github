@@ -5,29 +5,32 @@
         .module("FormBuilderApp")
         .controller("FieldController", FieldController);
 
-    function FieldController(FieldService, $routeParams)
+    function FieldController($scope, $rootScope, FieldService, $routeParams,$location)
     {
         $scope.$location = $location;
 
-        if ($rootScope.user != null){
-            FieldService.findAllFormsForUser($rootScope.user.id,
+        if ($rootScope.form != null){
+            FieldService.getFieldsForForm($rootScope.form.id,
 
-                function (forms){
-                    $scope.forms = forms;
+                function (fields){
+                    $scope.fields = fields;
                 });
         }
 
-        $scope.deleteField = function(index) {
-            FormService.deleteFormById($scope.forms[index].id, function(forms){
+        console.log("userid: " + $routeParams.userId);
+        console.log("formid: " + $routeParams.formId);
 
-                $scope.forms.splice(index,1);
+        $scope.deleteField = function(field) {//????????????
+            FieldService.deleteFieldFromForm($rootScope.forms.id,field.id, function(forms){
+
+                $scope.fields.splice(index,1);
             });
         }
 
-        $scope.addField = function() {
-            FormService.createFormForUser($rootScope.user.id, $scope.form, function(newForm){
+        $scope.addField = function(fieldType) {//??????????????
+            FieldService.createFieldForForm($rootScope.user.id, $scope.form, function(newField){
 
-                $scope.forms.push(newForm);
+                $scope.forms.push(newField);
             });
         }
 

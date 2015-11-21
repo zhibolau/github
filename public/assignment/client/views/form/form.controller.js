@@ -32,6 +32,22 @@
             $scope.forms.push(newForm);
             });
         };
+
+        console.log("location: " + $scope.$location.path());
+
+        $scope.jump = function(formid) {
+            FormService.getFormByFormId(formid)
+                .then(function(newForm){
+                //console.log(newForm)
+                var myForm = newForm;
+                    $scope.$location.path("/forms/"+newForm.id);
+
+                //console.log("location: " + $scope.$location.path());
+
+            });
+
+        };
+
         
         $scope.updateForm = function() {
         }

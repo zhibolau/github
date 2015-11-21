@@ -118,12 +118,13 @@ module.exports = function(app) {
     }
 
     function FindByUserId(userId){
+        var forms =[];
         for (var i = 0; i<mock.length; i++){
             if (mock[i].userId == userId){
-                return mock[i];
+                forms.push(mock[i]);
             }
         }
-        return null;
+        return forms;
     }
 
     function Update(id, form){

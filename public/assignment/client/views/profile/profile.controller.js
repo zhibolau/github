@@ -11,8 +11,9 @@
         $scope.$location = $location;
         
         $scope.update = function() {
-            
-            UserService.updateUser($scope.profileUser.id, $scope.profileUser, function(user){
+            //console.log("user id in profile: " + $scope.profileUser.id);
+
+            UserService.updateUser($rootScope.user.id, $rootScope.user, function(user){
                 
                 if(user != null)
                 {
