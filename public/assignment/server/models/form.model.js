@@ -3,7 +3,7 @@ var guid = require("guid");
 var formSchema = require("./form.schema.js");
 var fieldSchema = require("./field.schema.js");
 
-module.exports = function(app) {
+module.exports = function(mongoose, db) {
     var FormModel = mongoose.model("FormModel", formSchema);
 
     var FieldModel = mongoose.model("FieldModel", fieldSchema);
