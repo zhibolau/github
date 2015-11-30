@@ -1,5 +1,6 @@
-var model = require("../models/user.model.js")();
-module.exports = function (app) {
+// var model = require("../models/user.model.js")();
+
+module.exports = function (app,model) {
     app.post("/api/assignment/user", Create);
     //app.get("/api/assignment/user", FindAll);
     app.get("/api/assignment/user/:id", FindById);
