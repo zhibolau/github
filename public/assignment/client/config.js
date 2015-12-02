@@ -43,7 +43,7 @@
             })
 
             .otherwise({
-                //redirectTo: "/home"
+                redirectTo: "/home"
             });
     }
 })();

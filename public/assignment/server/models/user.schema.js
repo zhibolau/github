@@ -1,5 +1,5 @@
 
-module.exports = function(mongoose, app) {
+module.exports = function(mongoose,app) {
 
 
     var UserSchema  = mongoose.Schema({

@@ -1,9 +1,10 @@
 var q = require("q");
 var mock = require("./user.mock.json");
 var guid = require("guid");
-var userSchema = require("./user.schema.js");
+
 
 module.exports = function(mongoose, db) {
+    var userSchema = require("./user.schema.js")(mongoose);
     var UserModel = mongoose.model("UserModel", userSchema);
 
 

@@ -3,8 +3,8 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/db');
-var db = mongoose.connection;
+//mongoose.connect('mongodb://localhost/db');
+//var db = mongoose.connection;
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
@@ -20,7 +20,7 @@ if(process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
         process.env.OPENSHIFT_APP_NAME;
 }
 
-//var db = mongoose.connect(connectionString);
+var db = mongoose.connect(connectionString);
 
 
 app.use(bodyParser.json());
