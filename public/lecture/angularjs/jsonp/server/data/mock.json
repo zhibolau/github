@@ -1,0 +1,40 @@
+[
+{
+id: 1,
+name: 'joe',
+likes : [
+{
+idIMDB: '1234',
+title: 'Movie 1324'
+}
+]
+},
+{
+id: 2,
+name: 'jilll',
+likes : [
+{
+idIMDB: '4234',
+title: 'Movie 4324'
+},
+{
+idIMDB: '5234',
+title: 'Movie 5524'
+}
+]
+},
+{
+id: 122,
+name: 'jane',
+likes : [
+{
+idIMDB: '4234',
+title: 'Movie 4324'
+},
+{
+idIMDB: '5234',
+title: 'Movie 5524'
+}
+]
+}
+]

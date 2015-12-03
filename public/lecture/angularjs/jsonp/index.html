@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MovieApp">
+<head >
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0-beta.1/angular-route.min.js"></script>
+    <script src="app.js"></script>
+
+    <script src="services/MovieService.js"></script>
+    <script src="controllers/SearchMovieController.js"></script>
+
+    <title></title>
+</head>
+<body>
+    <div class="container" ng-controller="SearchMovieController">
+        <h1>search movie</h1>
+        <!--{{response}}-->
+        <div class="input-group">
+            <input ng-model="movie.title" type="text" class="form-control" placeholder="Search for ...">
+            <span class="input-group-btn">
+                <button ng-click="searchMovie(movie.title)" class="btn btn-primary" type="button">search</button>
+            </span>
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>IMDB ID</th>
+                    <th>Title</th>
+                    <th>like</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+
+                    <td>321</td>
+                    <td>dumb and dumber</td>
+                    <td>
+                        <button ng-click="likeMovie(321)" class="btn btn-info">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr ng-repeat="movie in response">
+                    <td>{{movie.idIMDB}}</td>
+                    <td>{{movie.title}}</td>
+
+                    <td>
+                        <button ng-click="likeMovie(movie.idIMDB)" class="btn btn-info">
+                            <span class="glyphicon glyphicon-star-empty"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
