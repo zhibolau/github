@@ -15,11 +15,11 @@
                 controller: "LoginController"
             })
             .when("/register", {
-                templateUrl: "register/register.view.html",
+                templateUrl: "notInUse/register/register.view.html",
                 controller: "RegisterController"
             })
             .when("/profile", {
-                templateUrl: "profile/profile.view.html",
+                templateUrl: "notInUse/profile/profile.view.html",
                 controller: "ProfileController"
             })
             .when("/forms", {
