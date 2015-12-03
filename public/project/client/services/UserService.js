@@ -20,7 +20,7 @@
         };
 
         return service;
-        
+
         function guid() {
                   function s4() {
                     return Math.floor((1 + Math.random()) * 0x10000)
@@ -35,18 +35,18 @@
         {
             for (var i = 0; i<users.length; i++){
                 if (users[i].username == username && users[i].password == password){
-                    
+
                     callback(users[i]);
                 }
             }
             callback(null);
         }
-        
+
         function findAllUsers( callback)
         {
             callback(users);
         }
-        
+
         function createUser(user, callback)
         {
             var newUser = {
@@ -60,7 +60,7 @@
             users.push(newUser);
             callback(newUser);
         }
-        
+
         function deleteUserById(id, callback)
         {
             for (var i = 0; i<users.length; i++){
@@ -73,7 +73,7 @@
 
         function updateUser(id, user , callback)
         {
-            
+
             for (var i = 0; i<users.length; i++){
                 if (users[i].id == id){
                     users[i].username = user.username;
