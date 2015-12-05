@@ -2,7 +2,7 @@
     "use strict";
     
     angular
-        .module("FormBuilderApp")
+        .module("IdealApp")
         .config(Configure);
 
     function Configure($routeProvider) {

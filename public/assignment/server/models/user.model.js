@@ -1,5 +1,5 @@
 var q = require("q");
-var mock = require("./user.mock.json");
+
 var guid = require("guid");
 
 
@@ -22,8 +22,6 @@ module.exports = function(mongoose, db) {
 
     function Create(user){
         var deferred = q.defer();
-        //mock.push(user);
-        //return mock;
         UserModel.create(user, function(err, doc){
             UserModel.find(function(err, users){
                 deferred.resolve(users);
@@ -70,19 +68,7 @@ module.exports = function(mongoose, db) {
         return deferred.promise;
     }
 
-    //function Update(id, user){
-    //    var newUser = FindById(id);
-    //    if (newUser != null) {
-    //        newUser.username = user.username;
-    //        newUser.password = user.password;
-    //        newUser.email = user.email;
-    //        newUser.firstName = user.firstName;
-    //        newUser.lastName = user.lastName;
-    //
-    //        return newUser;
-    //    }
-    //    return null;
-    //}
+
 
     function Delete(id) {
         var deferred = q.defer();
@@ -98,14 +84,7 @@ module.exports = function(mongoose, db) {
         return deferred.promise;
     }
 
-    //function Delete(id){
-    //    for (var i = 0; i<mock.length; i++){
-    //        if (mock[i].id == id){
-    //            mock.splice(i,1);
-    //        }
-    //    }
-    //    return mock;
-    //}
+
 
     function findUserByUsername(username) {
         var deferred = q.defer();
@@ -114,21 +93,12 @@ module.exports = function(mongoose, db) {
             deferred.resolve(user);
         });
 
-        //UserModel.find(username, function(err, user){
-        //    deferred.resolve(user);
-        //});
+
 
         return deferred.promise;
     }
 
-    //function findUserByUsername(username){  用了find  就不用自己定义的了？？？？？？？？？？？？？？？？
-    //    for (var i = 0; i<mock.length; i++){
-    //        if (mock[i].username == username){
-    //            return mock[i];
-    //        }
-    //    }
-    //    return null;
-    //}
+
 
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
@@ -137,20 +107,11 @@ module.exports = function(mongoose, db) {
             deferred.resolve(user);
         });
 
-        //UserModel.find(credentials, function(err, user){
-        //    deferred.resolve(user);
-        //});
+
 
         return deferred.promise;
     }
 
-    //function findUserByCredentials(credentials){
-    //    for (var i = 0; i<mock.length; i++){
-    //        if (mock[i].username == credentials.username && mock[i].password == credentials.password){
-    //            return mock[i];
-    //        }
-    //    }
-    //    return null;
-    //}
+
 
 };

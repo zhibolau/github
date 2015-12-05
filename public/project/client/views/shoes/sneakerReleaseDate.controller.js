@@ -1,10 +1,10 @@
 (function () {
     "use strict";
     angular
-        .module("FormBuilderApp")
-        .controller("AirJordansController", AirJordansController);
+        .module("IdealApp")
+        .controller("SneakerReleaseDateController", SneakerReleaseDateController);
 
-    function AirJordansController($scope, $location)
+    function SneakerReleaseDateController($scope, $location)
     {
         $scope.$location = $location;
     }

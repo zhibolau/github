@@ -2,14 +2,11 @@
 {
     "use strict";
     angular
-        .module("FormBuilderApp")
+        .module("IdealApp")
         .factory("UserService", UserService);
 
-    function UserService()
+    function UserService($http, $q)
     {
-        var users = [
-        ];
-
         var service = {
             findUserByUsernameAndPassword : findUserByUsernameAndPassword,
             findAllUsers : findAllUsers,
@@ -21,70 +18,61 @@
 
         return service;
 
-        function guid() {
-                  function s4() {
-                    return Math.floor((1 + Math.random()) * 0x10000)
-                      .toString(16)
-                      .substring(1);
-                  }
-                  return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-                    s4() + '-' + s4() + s4() + s4();
-}
 
-        function findUserByUsernameAndPassword( username, password, callback)
+
+        function findUserByUsernameAndPassword(username, password)
         {
-            for (var i = 0; i<users.length; i++){
-                if (users[i].username == username && users[i].password == password){
-
-                    callback(users[i]);
-                }
-            }
-            callback(null);
+            var deferred = $q.defer();
+            $http.get("/api/project/user?username="+username+"&password="+password)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
         }
 
-        function findAllUsers( callback)
+        function findAllUsers()
         {
-            callback(users);
+            var deferred = $q.defer();
+            $http.get("/api/project/user")
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
         }
 
-        function createUser(user, callback)
+        function createUser(user)
         {
-            var newUser = {
-                id : guid(),
-                username : user.username,
-                password : user.password,
-                email : user.email,
-                firstName : null,
-                lastName : null
-            };
-            users.push(newUser);
-            callback(newUser);
+            var deferred = $q.defer();
+            $http.post("/api/project/user", user)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
         }
 
-        function deleteUserById(id, callback)
+        function deleteUserById(id)
         {
-            for (var i = 0; i<users.length; i++){
-                if (users[i].id == id){
-                    users.splice(i,1);
-                }
-            }
-            callback(users);
+            var deferred = $q.defer();
+            $http.delete("/api/project/user/"+id)
+                .success(function (response) {
+                    deferred.resolve(response);
+                });
+            return deferred.promise;
         }
 
-        function updateUser(id, user , callback)
+        function updateUser(id, user)
         {
+            console.log("update user: " + id);
 
-            for (var i = 0; i<users.length; i++){
-                if (users[i].id == id){
-                    users[i].username = user.username;
-                    users[i].password = user.password;
-                    users[i].email = user.email;
-                    users[i].firstName = user.firstName;
-                    users[i].lastName = user.lastName;
-                    callback(users[i]);
-                 }
-            }
-            callback(null);
+            var deferred = $q.defer();
+            $http.put("/api/project/user/"+id, user)
+                .success(function (response) {
+                    deferred.resolve(response);
+
+                    var user = response;
+                    console.log("user update res: " + user.id);
+                });
+            return deferred.promise;
         }
 
     }

@@ -2,6 +2,6 @@
     "use strict";
     
     angular
-        .module("FormBuilderApp", ["ngRoute"]);
+        .module("IdealApp", ["ngRoute"]);
 }
 )();

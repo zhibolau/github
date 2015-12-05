@@ -9,7 +9,7 @@ module.exports = function(mongoose,app) {
         "username": String,
         "password": String
 
-    }, {collection: "cs5610.assignment.user"});
+    }, {collection: "cs5610.project.user"});
 
     return UserSchema;
 };

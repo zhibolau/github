@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     angular
-        .module("FormBuilderApp")
+        .module("IdealApp")
         .controller("AirJordanReleaseDateController", AirJordanReleaseDateController);
 
     function AirJordanReleaseDateController($scope, $location)

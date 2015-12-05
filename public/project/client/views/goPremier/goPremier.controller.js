@@ -1,7 +1,7 @@
 (function () {
     "use strict";
     angular
-        .module("FormBuilderApp")
+        .module("IdealApp")
         .controller("GoPremierController", GoPremierController);
 
     function GoPremierController($scope, $location)

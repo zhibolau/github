@@ -2,7 +2,7 @@
 {
     "use strict";
     angular
-        .module("FormBuilderApp")
+        .module("IdealApp")
         .controller("ProfileController", ProfileController);
 
     function ProfileController($scope, $location, UserService, $rootScope)
