@@ -27,7 +27,7 @@
                 controller: "ProfileController"
             })
             .when("/forms", {
-                templateUrl: "../notInUse/form/form.view.html",
+                templateUrl: "views/form/form.view.html",
                 controller: "FormController"
             })
             

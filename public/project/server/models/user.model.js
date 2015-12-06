@@ -44,7 +44,7 @@ module.exports = function(mongoose, db) {
     function FindById(id) {
         var deferred = q.defer();
 
-        ProjectUserModel.findById(id, function(err, user){
+        ProjectUserModel.find(id, function(err, user){
             deferred.resolve(user);
         });
 
@@ -89,7 +89,7 @@ module.exports = function(mongoose, db) {
     function findUserByUsername(username) {
         var deferred = q.defer();
 
-        ProjectUserModel.findById(username, function(err, user){
+        ProjectUserModel.find(username, function(err, user){
             deferred.resolve(user);
         });
 
@@ -103,7 +103,7 @@ module.exports = function(mongoose, db) {
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
 
-        ProjectUserModel.findById(credentials, function(err, user){
+        ProjectUserModel.find(credentials, function(err, user){
             deferred.resolve(user);
         });
 
