@@ -1,40 +1,64 @@
-//var model = require("../models/form.model.js")();
-module.exports = function (app, model) {
-    app.get("/api/assignment/user/:userId/form", FindByUserId);
-    app.get("/api/assignment/form/:formId", FindById);
-    app.delete("/api/assignment/form/:formId", Delete);
-    app.post("/api/assignment/user/:userId/form", CreateFormForUser);
-    app.put("/api/assignment/form/:formId", Update);
-    app.get("/api/assignment/form", FindAll);
+module.exports = function(app, model) {
+    app.get('/api/assignment/form', findAllForms);
+    app.get('/api/assignment/user/:userId/form', findAllFormsForUser);
+    app.get('/api/assignment/form/:formId', findFormById);
+    app.delete('/api/assignment/form/:formId', deleteFormById);
+    app.post('/api/assignment/user/:userId/form', createFormForUser);
+    app.put('/api/assignment/form/:formId', updateFormById);
 
-    function FindAll(req,res){
-        res.jsonp(model.FindAll());
+    function findAllForms(req, res) {
+        model
+            .findAllForms()
+            .then(function(forms){
+                res.json(forms);
+            });
     }
 
-    function FindByUserId(req,res){
-        var id = req.params.userId;
-        res.jsonp(model.FindByUserId(id));
+    function findAllFormsForUser(req, res) {
+        model
+            .findAllFormsForUser(req.params.userId)
+            .then(function(forms){
+                res.json(forms);
+            });
     }
 
-    function FindById(req,res){
-        var id = req.params.formId;
-        res.jsonp(model.FindById(id));
+    function findFormById(req, res) {
+        model
+            .findFormById(req.params.formId)
+            .then(function(form){
+                res.json(form);
+            });
     }
 
-    function Delete(req,res){
-        var id = req.params.formId;
-        res.jsonp(model.Delete(id));
+    function deleteFormById(req, res) {
+        model
+            .deleteFormById(req.params.formId)
+            .then(function(forms){
+                res.json(forms);
+            });
     }
 
-    function CreateFormForUser(req,res){
-        var userid = req.params.userId;
+    function createFormForUser(req, res) {
+        var userId = req.params.userId;
         var form = req.body;
-        res.jsonp(model.CreateFormForUser(userid, form));
-    }
-    function Update(req,res){
-        var form = req.body;
-        var id = req.params.formId;
-        res.jsonp(model.Update(id, form));
+        var newForm = {
+            id : null,
+            title : form.title,
+            userId : userId,
+            fields : form.fields
+        };
+        model
+            .createFormForUser(newForm)
+            .then(function(result){
+                res.json(result);
+            });
     }
 
-}
+    function updateFormById(req, res) {
+        model
+            .updateFormById(req.params.formId, req.body)
+            .then(function(form){
+                res.json(form);
+            });
+    }
+};

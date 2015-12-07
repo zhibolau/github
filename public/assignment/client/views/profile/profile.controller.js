@@ -1,28 +1,20 @@
 (function()
 {
-    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $location, UserService, $rootScope)
+    function ProfileController($location, $rootScope, UserService)
     {
-        
-        $scope.$location = $location;
-        
-        $scope.update = function() {
-            //console.log("user id in profile: " + $scope.profileUser.id);
+        var model = this;
+        model.$location = $location;
 
-            UserService.updateUser($rootScope.user.id, $rootScope.user, function(user){
-                
-                if(user != null)
-                {
-                    $rootScope.user = user;
-                    $location.url("/profile");
-                    
-                }
+
+        model.update = function (profileUser) {
+            UserService.updateUser($rootScope.user._id, profileUser).then(function (user) {
+                $rootScope.user = user;
+                $location.url("/profile");
             });
         }
-        
     }
 })();

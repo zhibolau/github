@@ -1,24 +1,21 @@
 (function()
 {
-    "use strict";
     angular
         .module("FormBuilderApp")
         .controller("RegisterController", RegisterController);
 
-     function RegisterController($scope, $location, UserService, $rootScope)
+    function RegisterController($location, $rootScope, UserService)
     {
-        
-        $scope.$location = $location;
-        
-        $scope.register = function() {
-            
-            UserService.createUser($scope.registerUser).then(function(newUser){
-                $rootScope.user = newUser;
-                $location.url("/profile");
-                
-                
-            });
+        var model = this;
+        model.$location = $location;
+
+        model.register = function (registerUser) {
+            if (registerUser.username != null && registerUser.password1 == registerUser.password2) {
+                UserService.createUser(registerUser).then(function (user) {
+                    $rootScope.user = user;
+                    $location.url("/profile");
+                });
+            }
         }
-        
     }
 })();

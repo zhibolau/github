@@ -1,40 +1,47 @@
-// var model = require("../models/form.model.js")();
-module.exports = function (app, model) {
-    app.get("/api/assignment/form/:formId/field", FindFieldsByFormId);
-    app.get("/api/assignment/form/:formId/field/:fieldId", FindFieldByFieldIdAndFormId);
-    app.delete("/api/assignment/form/:formId/field/:fieldId", DeleteFieldByFieldIdAndFormId);
-    app.post("/api/assignment/form/:formId/field", CreateFieldForForm);
-    app.put("/api/assignment/form/:formId/field/:fieldId", UpdateFieldByFieldIdAndFormId);
+module.exports = function(app, model) {
+    app.get('/api/assignment/form/:formId/field', findAllFieldsForForm);
+    app.get('/api/assignment/form/:formId/field/:fieldId', findFieldById);
+    app.delete('/api/assignment/form/:formId/field/:fieldId', deleteFieldFromForm);
+    app.post('/api/assignment/form/:formId/field', createFieldForForm);
+    app.put('/api/assignment/form/:formId/field/:fieldId', updateFieldById);
 
-    function FindFieldsByFormId(req,res){ //怎么获得当前form 跟 field 的 各自id？？？？？？？？？？
-        var id = req.params.formId;
-        res.jsonp(model.FindFieldsByFormId(id));
+    function findAllFieldsForForm(req, res) {
+        model
+            .findAllFieldsForForm(req.params.formId)
+            .then(function(fields) {
+                res.json(fields);
+            });
     }
 
-    function FindFieldByFieldIdAndFormId(req,res){ //怎么获得当前form 跟 field 的 各自id
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-
-        res.jsonp(model.FindFieldByFieldIdAndFormId(fieldId,formId));
+    function findFieldById(req, res) {
+        model
+            .findFieldById(req.params.formId, req.params.fieldId)
+            .then(function(field) {
+                res.json(field);
+            });
     }
 
-    function DeleteFieldByFieldIdAndFormId(req,res){
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-
-        res.jsonp(model.DeleteFieldByFieldIdAndFormId(fieldId,formId));
+    function deleteFieldFromForm(req, res) {
+        model
+            .deleteFieldFromForm(req.params.formId, req.params.fieldId)
+            .then(function(fields) {
+                res.json(fields);
+            });
     }
 
-    function CreateFieldForForm(req,res){
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        res.jsonp(model.CreateFieldForForm(fieldId,formId));
-    }
-    function UpdateFieldByFieldIdAndFormId(req,res){
-        var field = req.body;
-        var formId = req.params.formId;
-        var fieldId = req.params.fieldId;
-        res.jsonp(model.UpdateFieldByFieldIdAndFormId(fieldId, formId, field));
+    function createFieldForForm(req, res) {
+        model
+            .createFieldForForm(req.params.formId, req.body)
+            .then(function(result) {
+                res.json(result);
+            });
     }
 
+    function updateFieldById(req, res) {
+        model
+            .updateFieldById(req.params.formId, req.params.fieldId, req.body)
+            .then(function(field) {
+                res.json(field);
+            });
+    }
 }

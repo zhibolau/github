@@ -20,7 +20,7 @@
         
 //
 
-        function findUserByUsernameAndPassword(username, password) //²»È·¶¨£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡£¡
+        function findUserByUsernameAndPassword(username, password)
         {
             var deferred = $q.defer();
             $http.get("/api/assignment/user?username="+username+"&password="+password)
@@ -62,15 +62,11 @@
 
         function updateUser(id, user)
         {
-            console.log("update user: " + id);
 
             var deferred = $q.defer();
             $http.put("/api/assignment/user/"+id, user)
                 .success(function (response) {
                     deferred.resolve(response);
-
-                    var user = response;
-                    console.log("user update res: " + user.id);
                 });
             return deferred.promise;
         }
