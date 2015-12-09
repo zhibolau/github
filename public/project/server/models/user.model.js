@@ -1,63 +1,29 @@
 var q = require("q");
+
 var guid = require("guid");
 
 
 module.exports = function(mongoose, db) {
-    var userSchema = require("./user.schema.js")(mongoose);
-    var ProjectUserModel = mongoose.model("ProjectUserModel", userSchema);
+    var pUserSchema = require("./user.schema.js")(mongoose);
+    var pUserModel = mongoose.model("pUserModel", pUserSchema);
 
 
 
     var api = {
-        Create: Create,
-        FindAll: FindAll,
-        FindById: FindById,
-        Update: Update,
-        Delete: Delete,
+        createUser: createUser,
+        findAllUsers: findAllUsers,
+        findUserById: findUserById,
+        updateUserById: updateUserById,
+        deleteUserById: deleteUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials
     }
     return api;
 
-    function Create(user){
+    function createUser(user){
         var deferred = q.defer();
 
-        ProjectUserModel.create(user, function(err, doc){
-            ProjectUserModel.find(function(err, users){
-                deferred.resolve(users);
-            });
-        });
-        return deferred.promise;
-    }
-
-
-    function FindAll() {
-        var deferred = q.defer();
-
-        ProjectUserModel.find(function(err, users){
-            deferred.resolve(users);
-        });
-
-        return deferred.promise;
-    }
-
-    function FindById(id) {
-        var deferred = q.defer();
-
-        ProjectUserModel.find(id, function(err, user){
-            deferred.resolve(user);
-        });
-
-        return deferred.promise;
-    }
-
-
-    function Update(id, user) {
-        var deferred = q.defer();
-
-        user.delete("_id");
-
-        ProjectUserModel.update({_id: id}, {$set: user}, function(err, user) {
+        pUserModel.create(user, function(err, user) {
             if(err) {
                 deferred.reject(err);
             } else {
@@ -69,11 +35,63 @@ module.exports = function(mongoose, db) {
     }
 
 
-
-    function Delete(id) {
+    function findAllUsers() {
         var deferred = q.defer();
 
-        ProjectUserModel.remove({_id: id}, function(err, status) {
+        pUserModel.find(function(err, users){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(users);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+    function findUserById(id) {
+        var deferred = q.defer();
+
+        pUserModel.findById(id, function(err, user){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
+        });
+
+        return deferred.promise;
+    }
+
+
+    function updateUserById(id, user) {
+        var deferred = q.defer();
+
+        pUserModel.update(
+            {_id: id},
+            {$set:
+            {
+                firstName : user.firstName,
+                lastName : user.lastName,
+                username : user.username,
+                password : user.password,
+            },
+            },
+            function(err, result) {
+                pUserModel.findOne({_id : id}, function(err, result) {
+                    deferred.resolve(result);
+                });
+            });
+
+        return deferred.promise;
+    }
+
+
+
+    function deleteUserById(id) {
+        var deferred = q.defer();
+
+        pUserModel.remove({_id: id}, function(err, status) {
             if(err) {
                 deferred.reject(err);
             } else {
@@ -89,11 +107,13 @@ module.exports = function(mongoose, db) {
     function findUserByUsername(username) {
         var deferred = q.defer();
 
-        ProjectUserModel.find(username, function(err, user){
-            deferred.resolve(user);
+        pUserModel.findOne({username: username}, function(err, user){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
         });
-
-
 
         return deferred.promise;
     }
@@ -103,11 +123,16 @@ module.exports = function(mongoose, db) {
     function findUserByCredentials(credentials) {
         var deferred = q.defer();
 
-        ProjectUserModel.find(credentials, function(err, user){
-            deferred.resolve(user);
+        pUserModel.findOne({
+            username: credentials.username,
+            password: credentials.password
+        }, function(err, user){
+            if(err) {
+                deferred.reject(err);
+            } else {
+                deferred.resolve(user);
+            }
         });
-
-
 
         return deferred.promise;
     }

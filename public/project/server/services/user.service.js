@@ -1,54 +1,68 @@
-// var model = require("../models/user.model.js")();
+module.exports = function(app, model) {
+    app.post('/api/project/user', createUser);
+    app.get('/api/project/user', findUser);
+    app.get('/api/project/user/:id', findUserById);
+    app.put('/api/project/user/:id', updateUserById);
+    app.delete('/api/project/user/:id', deleteUserById);
 
-module.exports = function (app,model) {
-    app.post("/api/project/user", Create);
-    app.get("/api/project/user/:id", FindById);
-    app.put("/api/project/user/:id", Update);
-    app.delete("/api/project/user/:id", Delete);
+    function createUser(req, res) {
+        model
+            .createUser(req.body)
+            .then(function(user) {
+                res.json(user);
+            });
+    }
 
-    app.get("/api/project/user", function (req,res) {
+    function findUser(req, res) {
         var username = req.query.username;
         var password = req.query.password;
-        if(password != null && username !=null){
-            var credential ={
+        if (username != null && password != null) {
+            var credentials =
+            {
                 username: username,
                 password: password
             };
-            var user_found = model.findUserByCredentials(credential);
-            res.jsonp(user_found);
-        } else if (username != null){
-            var user_found = model.findUserByUsername(username);
-            res.jsonp(user_found);
+            model
+                .findUserByCredentials(credentials)
+                .then(function(user) {
+                    res.json(user);
+                });
+        } else if (username != null) {
+            model
+                .findUserByUsername(username)
+                .then(function(user) {
+                    res.json(user);
+                });
+        } else {
+            model
+                .findAllUsers()
+                .then(function(users) {
+                    res.json(users);
+                });
         }
-        else{
-            res.jsonp(model.FindAll());
-        }
-
-    });
-
-    function Create(req,res){
-        var user = req.body;
-        res.jsonp(model.Create(user));
     }
 
-
-
-    function FindById(req,res){
-        var id = req.params.id;
-        res.jsonp(model.FindById(id));
+    function findUserById(req, res) {
+        model
+            .findUserById(req.params.id)
+            .then(function(user) {
+                res.json(user);
+            });
     }
 
-
-
-    function Update(req,res){
-        var user = req.body;
-        var id = req.params.id;
-        res.jsonp(model.Update(id, user));
+    function updateUserById(req, res) {
+        model
+            .updateUserById(req.params.id, req.body)
+            .then(function(users) {
+                res.json(users);
+            });
     }
 
-    function Delete(req,res){
-        var id = req.params.id;
-        res.jsonp(model.Delete(id));
+    function deleteUserById(req, res) {
+        model
+            .deleteUserById(req.params.id)
+            .then(function(users) {
+                res.json(users);
+            });
     }
-
 }

@@ -14,8 +14,6 @@
             userId = $rootScope.user._id;
         }
         var formId = $rootScope.formId;
-        console.log("form id is: ");
-        console.log(formId);
         if (formId != null) {
             FieldService.getFieldsForForm(formId).then(function(response) {
                 model.fields = response;

@@ -1,26 +1,23 @@
-(function () {
-    "use strict";
+(function()
+{
     angular
         .module("IdealApp")
         .controller("LoginController", LoginController);
 
-    function LoginController($scope, $location, UserService, $rootScope)
+    function LoginController($rootScope, $location, UserService)
     {
-
-        $scope.$location = $location;
-
-        $scope.login = function() {
-
-            UserService.findUserByUsernameAndPassword($scope.loginUser.username, $scope.loginUser.password).then(function(user){
-
-                if(user != null)
-                {
-                    $rootScope.user = user;
-                    $location.url("/profile");
-                }
-            });
+        var model = this;
+        model.$location = $location;
+        model.login = function (loginUser)
+        {
+            UserService
+                .findUserByUsernameAndPassword(loginUser.username, loginUser.password)
+                .then(function (user) {
+                    if (user != null) {
+                        $rootScope.user = user;
+                        $location.url("/profile");
+                    }
+                });
         }
-
     }
-
 })();

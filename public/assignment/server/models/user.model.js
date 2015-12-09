@@ -10,17 +10,17 @@ module.exports = function(mongoose, db) {
 
 
     var api = {
-        Create: Create,
-        FindAll: FindAll,
-        FindById: FindById,
-        Update: Update,
-        Delete: Delete,
+        createUser: createUser,
+        findAllUsers: findAllUsers,
+        findUserById: findUserById,
+        updateUserById: updateUserById,
+        deleteUserById: deleteUserById,
         findUserByUsername: findUserByUsername,
         findUserByCredentials: findUserByCredentials
     }
     return api;
 
-    function Create(user){
+    function createUser(user){
         var deferred = q.defer();
 
         UserModel.create(user, function(err, user) {
@@ -35,7 +35,7 @@ module.exports = function(mongoose, db) {
     }
 
 
-    function FindAll() {
+    function findAllUsers() {
         var deferred = q.defer();
 
         UserModel.find(function(err, users){
@@ -49,7 +49,7 @@ module.exports = function(mongoose, db) {
         return deferred.promise;
     }
 
-    function FindById(id) {
+    function findUserById(id) {
         var deferred = q.defer();
 
         UserModel.findById(id, function(err, user){
@@ -64,7 +64,7 @@ module.exports = function(mongoose, db) {
     }
 
 
-    function Update(id, user) {
+    function updateUserById(id, user) {
         var deferred = q.defer();
 
         UserModel.update(
@@ -88,7 +88,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function Delete(id) {
+    function deleteUserById(id) {
         var deferred = q.defer();
 
         UserModel.remove({_id: id}, function(err, status) {

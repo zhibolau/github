@@ -1,24 +1,21 @@
 (function()
 {
-    "use strict";
     angular
         .module("IdealApp")
         .controller("RegisterController", RegisterController);
 
-    function RegisterController($scope, $location, UserService, $rootScope)
+    function RegisterController($location, $rootScope, UserService)
     {
+        var model = this;
+        model.$location = $location;
 
-        $scope.$location = $location;
-
-        $scope.register = function() {
-
-            UserService.createUser($scope.registerUser).then(function(newUser){
-                $rootScope.user = newUser;
-                $location.url("/profile");
-
-
-            });
+        model.register = function (registerUser) {
+            if (registerUser.username != null && registerUser.password1 == registerUser.password2) {
+                UserService.createUser(registerUser).then(function (user) {
+                    $rootScope.user = user;
+                    $location.url("/profile");
+                });
+            }
         }
-
     }
 })();

@@ -28,28 +28,28 @@
           </thead>
             <tbody >
                 <tr >
-                      <td><input ng-model="form.title" id="title" class="form-control" type="text" name="title" placeholder="name"/></td>
-                      <td><button ng-click="addForm()"  class="btn btn-default active btn-block">
+                      <td><input ng-model="model.form.title" id="title" class="form-control" type="text" name="title" placeholder="name"/></td>
+                      <td><button ng-click="model.addForm(model.form)"  class="btn btn-default active btn-block">
                         
                           <span class="glyphicon glyphicon-plus"></span>
                         </button>
-                          <button ng-click="updateForm()" class="btn btn-default active btn-block">
+                          <button ng-click="model.updateForm(model.form)" class="btn btn-default active btn-block">
                         
                           <span class="glyphicon glyphicon-ok"></span>
                         </button>
                       </td>
                 </tr>
-                <tr ng-repeat="form in forms">
+                <tr ng-repeat="form in model.forms">
                     <td>
-                        <a href="#/user/:userId/form/:formId/fields" ng-click="saveFormId(form)">
+                        <a href="#/user/:userId/form/:formId/fields" ng-click="model.saveFormId(form)">
                             {{form.title}}
                         </a>
                     </td>
                     <td>
-                        <a ng-click="deleteForm($index)" class="btn btn-danger">
+                        <a ng-click="model.deleteForm(form)" class="btn btn-danger">
                             <scan class="glyphicon glyphicon-remove"></scan>
                         </a>
-                        <a ng-click="selectForm($index)" class="btn btn-warning">
+                        <a ng-click="model.selectForm(form)" class="btn btn-warning">
                             <scan class="glyphicon glyphicon-pencil"></scan>
                         </a>
                     </td>

@@ -1,4 +1,4 @@
-
+var q = require("q");
 var guid = require("guid");
 
 
@@ -12,20 +12,20 @@ module.exports = function(mongoose, db) {
     var api = {
         //form related functions
         Create: Create,
-        CreateFormForUser: CreateFormForUser,
-        FindAll: FindAll,
-        FindById: FindById,
-        FindByUserId: FindByUserId,
-        Update: Update,
-        Delete: Delete,
+        createFormForUser: createFormForUser,
+        findAllForms: findAllForms,
+        findFormById: findFormById,
+        findAllFormsForUser: findAllFormsForUser,
+        updateFormById: updateFormById,
+        deleteFormById: deleteFormById,
         FindFormByTitle: FindFormByTitle,
 
         //filed related functions
-        FindFieldsByFormId: FindFieldsByFormId,
-        FindFieldByFieldIdAndFormId: FindFieldByFieldIdAndFormId,
-        DeleteFieldByFieldIdAndFormId: DeleteFieldByFieldIdAndFormId,
-        CreateFieldForForm: CreateFieldForForm,
-        UpdateFieldByFieldIdAndFormId: UpdateFieldByFieldIdAndFormId
+        findAllFieldsForForm: findAllFieldsForForm,
+        findFieldById: findFieldById,
+        deleteFieldFromForm: deleteFieldFromForm,
+        createFieldForForm: createFieldForForm,
+        updateFieldById: updateFieldById
 
     }
     return api;
@@ -43,7 +43,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function CreateFormForUser(userId, form) {
+    function createFormForUser(userId, form) {
         var deferred = q.defer();
 
         FormModel.findById(userId, function(err, user){
@@ -58,7 +58,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function FindAll() {
+    function findAllForms() {
         var deferred = q.defer();
 
         FormModel.find(function(err, forms){
@@ -74,7 +74,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function FindById(id) {
+    function findFormById(id) {
         var deferred = q.defer();
 
         FormModel.findById(formId, function(err, form){
@@ -90,7 +90,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function FindByUserId(userId) {
+    function findAllFormsForUser(userId) {
         var deferred = q.defer();
 
         FormModel.find({userId: userId}, function(err, forms){
@@ -106,7 +106,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function Update(id, form) {
+    function updateFormById(id, form) {
 
         var deferred = q.defer();
 
@@ -124,7 +124,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function Delete(id) {
+    function deleteFormById(id) {
         var deferred = q.defer();
 
         FormModel.remove({_id: id}, function(err, status) {
@@ -157,7 +157,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function CreateFieldForForm(formId, field) {
+    function createFieldForForm(formId, field) {
         var deferred = q.defer();
         field.id = Guid.create();
         FormModel.findById(formId, function(err, form){
@@ -172,7 +172,7 @@ module.exports = function(mongoose, db) {
     }
 
 
-    function FindFieldsByFormId(id) {
+    function findAllFieldsForForm(id) {
 
         var deferred = q.defer();
 
@@ -191,7 +191,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function FindFieldByFieldIdAndFormId(fieldId,FormId) {
+    function findFieldById(fieldId,FormId) {
         var deferred = q.defer();
 
         FormModel.findById(formId, function(err, form){
@@ -208,7 +208,7 @@ module.exports = function(mongoose, db) {
 
 
 
-    function DeleteFieldByFieldIdAndFormId(fieldId,FormId) {
+    function deleteFieldFromForm(fieldId,FormId) {
         var deferred = q.defer();
 
         FormModel.findById(formId, function(err, form){
@@ -227,7 +227,7 @@ module.exports = function(mongoose, db) {
     }
 
 
-    function UpdateFieldByFieldIdAndFormId(FieldId,FormId, newField) {
+    function updateFieldById(FieldId,FormId, newField) {
         var deferred = q.defer();
 
         FormModel.findById(formId, function(err, form){

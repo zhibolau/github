@@ -1,27 +1,20 @@
 (function()
 {
-    "use strict";
     angular
         .module("IdealApp")
         .controller("ProfileController", ProfileController);
 
-    function ProfileController($scope, $location, UserService, $rootScope)
+    function ProfileController($location, $rootScope, UserService)
     {
-        
-        $scope.$location = $location;
-        
-        $scope.update = function() {
-            
-            UserService.updateUser($scope.profileUser.id, $scope.profileUser, function(user){
-                
-                if(user != null)
-                {
-                    $rootScope.user = user;
-                    $location.url("/profile");
-                    
-                }
+        var model = this;
+        model.$location = $location;
+
+
+        model.update = function (profileUser) {
+            UserService.updateUser($rootScope.user._id, profileUser).then(function (user) {
+                $rootScope.user = user;
+                $location.url("/profile");
             });
         }
-        
     }
 })();
