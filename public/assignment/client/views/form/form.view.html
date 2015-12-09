@@ -5,6 +5,7 @@
     <title></title>
 </head>
 <body>
+<div ng-controller="FormController">
     <div class="container-fluid">
       <div class="row">
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
@@ -39,7 +40,7 @@
                         </button>
                       </td>
                 </tr>
-                <tr ng-repeat="form in model.forms">
+                <tr ng-repeat="form in model.forms track by $index">
                     <td>
                         <a href="#/user/:userId/form/:formId/fields" ng-click="model.saveFormId(form)">
                             {{form.title}}
@@ -63,7 +64,8 @@
           </div>
         </div>
     </div>
-    
+</div>
     </body>
+
 </html>
 
